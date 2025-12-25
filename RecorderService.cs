@@ -8,21 +8,13 @@ namespace CopyUserAction;
 
 public class RecorderService : IDisposable
 {
-    private readonly TaskPoolGlobalHook _hook;
+    private TaskPoolGlobalHook? _hook;
     private readonly List<UserAction> _actions = new();
     private readonly Stopwatch _stopwatch = new();
     private bool _isRecording = false;
 
     public RecorderService()
     {
-        _hook = new TaskPoolGlobalHook();
-
-        _hook.MouseMoved += OnMouseMoved;
-        _hook.MousePressed += OnMousePressed;
-        _hook.MouseReleased += OnMouseReleased;
-        _hook.MouseWheel += OnMouseWheel;
-        _hook.KeyPressed += OnKeyPressed;
-        _hook.KeyReleased += OnKeyReleased;
     }
 
     public void Start()
@@ -33,16 +25,26 @@ public class RecorderService : IDisposable
         _stopwatch.Restart();
         _isRecording = true;
 
-        if (!_hook.IsRunning)
-        {
-            _hook.RunAsync();
-        }
+        var hook = new TaskPoolGlobalHook();
+        hook.MouseMoved += OnMouseMoved;
+        hook.MousePressed += OnMousePressed;
+        hook.MouseReleased += OnMouseReleased;
+        hook.MouseWheel += OnMouseWheel;
+        hook.KeyPressed += OnKeyPressed;
+        hook.KeyReleased += OnKeyReleased;
+
+        _hook = hook;
+        hook.RunAsync();
     }
 
     public List<UserAction> Stop()
     {
         _isRecording = false;
         _stopwatch.Stop();
+
+        _hook?.Dispose();
+        _hook = null;
+
         return new List<UserAction>(_actions);
     }
 
@@ -121,6 +123,6 @@ public class RecorderService : IDisposable
 
     public void Dispose()
     {
-        _hook.Dispose();
+        _hook?.Dispose();
     }
 }

@@ -28,6 +28,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         this.Closed += (s, e) =>
         {
+            _replayCts?.Cancel();
             _recorderService.Dispose();
             _stopHook?.Dispose();
         };
