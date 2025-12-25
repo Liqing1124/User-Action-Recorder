@@ -2,7 +2,7 @@
 
 A lightweight, high-precision tool to record and replay mouse and keyboard actions on Windows. Built with C# and Avalonia UI, featuring a modern interface and efficient performance.
 
-![User Action Recorder](https://raw.githubusercontent.com/Liqing1124/User-Action-Recorder/main/CopyUserAction.ico)
+
 
 ## Features
 
