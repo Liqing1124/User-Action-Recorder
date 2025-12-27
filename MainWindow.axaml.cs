@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
@@ -246,6 +247,11 @@ public partial class MainWindow : Window
     private async void OnHelpClick(object? sender, RoutedEventArgs e)
     {
         await ShowMessage("User Action Recorder Help:\n\n1. Click Record to start capturing actions.\n2. Click Stop to finish.\n3. Click Replay to play back.\n4. Set Stop Hotkey (default P) to interrupt replay.");
+    }
+
+    private void OnCopyrightClick(object? sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo("https://github.com/Liqing1124/User-Action-Recorder") { UseShellExecute = true });
     }
 
     private Task ShowMessage(string message)

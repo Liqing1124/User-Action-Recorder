@@ -3,8 +3,13 @@
         x:Class="CopyUserAction.MainWindow"
         Title="User Action Recorder"
         Icon="avares://CopyUserAction/CopyUserAction.ico"
-        Width="550" Height="160">
-    <StackPanel Margin="20" Spacing="15" VerticalAlignment="Top">
+        Width="570" Height="200">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Spacing="15" VerticalAlignment="Top" Grid.Column="0">
         <StackPanel Orientation="Horizontal" Spacing="10">
             <Button Name="BtnRecord" Content="Record" Width="100" Click="OnRecordClick"/>
             <Button Name="BtnReplay" Content="Replay" Width="120" Click="OnReplayClick"/>
@@ -28,5 +33,7 @@
             </StackPanel>
             <CheckBox Name="ChkTopMost" Content="Always on Top" VerticalAlignment="Center" IsCheckedChanged="OnTopMostCheckedChanged"/>
         </StackPanel>
-    </StackPanel>
+        </StackPanel>
+        <Button Name="BtnCopyright" Content="© Made by https://github.com/Liqing1124, open-source at https://github.com/Liqing1124/User-Action-Recorder" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="OnCopyrightClick" FontSize="10"/>
+    </Grid>
 </Window>
